@@ -1,0 +1,342 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body { 
+    background-color: black;
+    color: white;
+    font-family: Arial, sans-serif;
+    height: 200vh; /* Increase height to make scrolling possible */
+    background: linear-gradient(90deg, #000000, #fdedd2);
+    background-size: 400% 400%;
+    animation: gradientBackground 10s ease infinite;
+   display: flex;
+    flex-direction: column;
+    
+}
+
+@keyframes gradientBackground {
+    0% { background-position: 10% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 10% 50%; }
+}
+
+.container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin-bottom: 50px;
+}
+
+.noob, .boom {
+    position: absolute;
+    opacity: 0;
+    transition: opacity 1s ease, transform 1s ease;
+    width: 50%;
+    height: auto;
+    text-align: center;
+}
+
+.noob img {
+    width: 100%;
+    height: auto;
+}
+
+.two img {
+    width: 100%;
+    height: auto;
+    z-index: 2;
+    opacity: 1;
+    transition: opacity 1s ease, transform 1s ease;
+}
+
+.boom img {
+    width: 100%;
+    height: auto;
+}
+
+
+/* Scroll-triggered animations */
+.scroll-move .noob {
+    opacity: 1;
+    transform: translateX(-50%); /* Move to the left side */
+}
+
+.scroll-move .boom {
+    opacity: 1;
+    transform: translateX(50%); /* Move to the right side */
+}
+
+.scroll-move .two {
+    opacity: 1; /* Keep '2' always visible */
+    transform: translateY(-2%);
+}
+
+.tagline {
+    position: absolute;
+    bottom: -50px; /* Initially position it below the container */
+    opacity: 0;
+    font-size: 2rem;
+    color: #F5F7F8;
+    transition: all 1s ease;
+    text-align: center;
+    width: 100%;
+}
+
+.scroll-move .tagline {
+    bottom: 200px; /* Move it up once animation is triggered */
+    opacity: 1;
+}
+
+/* Title Bar */
+.title-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.8); /* Opaque background */
+    padding: 10px 20px;
+    z-index: 10;
+}
+
+.logo {
+    font-size: 1.8rem;
+    color: white;
+    font-weight: bold;
+}
+
+.menu-icon {
+    font-size: 2rem;
+    color: white;
+    cursor: pointer;
+}
+
+/* Side Menu */
+.side-menu {
+    position: fixed;
+    left: -250px; /* Initially hidden off-screen */
+    top: 0;
+    width: 250px;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    transition: all 0.3s ease;
+    z-index: 9;
+    padding-top: 60px; /* Space for menu items */
+}
+
+.side-menu.active {
+    left: 0; /* Move side menu into view */
+}
+
+.side-menu ul {
+    list-style: none;
+    padding: 0;
+}
+
+.side-menu li {
+    padding: 15px 20px;
+}
+
+.side-menu li a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.2rem;
+    display: block;
+}
+
+.side-menu li a:hover {
+    background-color: #444;
+}
+/* Divider Section Styling */
+.divider-section {
+    margin: 50px auto;
+    padding: 0px;
+    text-align: center;
+    color: white;
+    max-width: 800px;
+    opacity: 1; /* Start hidden */
+    transform: translateY(-100px); /* Start slightly out of view */
+    transition: opacity 1s ease, transform 1s ease; /* Fade-in effect */
+    position: relative; /* Default positioning to keep stacking order */
+    margin-top: 50px;
+    z-index: 1;
+}
+.divider-image {
+    display: block; /* Makes the image take up its own line */
+    margin: 20px auto; /* Centers the image horizontally */
+    max-width: 50%; /* Ensures the image doesn't overflow the container */
+    height: auto; /* Maintains the aspect ratio */
+    border-radius: 10px; /* Optional: Adds rounded corners */
+ /* Optional: Adds a shadow for better visibility */
+}
+.animated-image {
+    display: block;
+    margin: 20px auto; /* Centers the image */
+    max-width: 50%; /* Adjust the size of the image */
+    height: auto;
+    animation: fadeIn 2s ease, glowEffect 2s infinite alternate; /* Add fade-in and glowing animation */
+    filter: drop-shadow(0 0 10px yellow); /* Initial glow effect */
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Glowing effect animation */
+@keyframes glowEffect {
+    0% {
+        filter: drop-shadow(0 0 10px rgb(250, 255, 197));
+    }
+    100% {
+        filter: drop-shadow(0 0 20px rgb(255, 255, 255));
+    }
+}
+/* Wrapper for image and text */
+.content-wrapper {
+    display: flex;
+    align-items: center; /* Vertically center the items */
+    justify-content: center; /* Center the whole block horizontally */
+    gap: 200px; /* Space between the image and text */
+    margin: 80px auto; /* Center the entire block within the section */
+    max-width: 800px; /* Limit the block's width for balanced appearance */
+}
+
+/* Image */
+.divider-image {
+    max-width: 40%; /* Adjust the image size */
+    height: auto;
+    box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.6);
+    
+}
+
+/* Text content */
+.text-content {
+    color: white;
+    text-align: left;
+}
+
+/* Heading and description styling */
+.step-heading {
+    font-size: 2rem; /* Large heading */
+    color: rgb(0, 0, 0); /* Highlight the heading */
+    margin-bottom: 10px;
+    text-shadow: 0 0 5px #ffffff;
+}
+
+.step-description {
+    font-size: 1.2rem; /* Smaller description text */
+    line-height: 1.6; /* Improve readability */
+    color: #ffffff;
+}
+
+
+.rounded-line {
+    border: none;
+    height: 5px;
+    background-color: #fdedd2; /* Match with your background gradient */
+    border-radius: 5px;
+    width: 63%;
+    margin: 20px auto;
+    display: block;
+    margin-bottom: 20%;
+    margin-top: 20%;
+}
+
+.section-heading {
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 20px 0;
+    opacity: 0; /* Start hidden */
+    transform: translateX(-50px); /* Start from the left */
+    transition: opacity 1s ease, transform 1s ease; /* Left-to-right effect */
+}
+
+.section-text {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    opacity: 0; /* Start hidden */
+    transform: translateY(20px); /* Subtle upward motion */
+    transition: opacity 1.2s ease, transform 1.2s ease; /* Smooth fade-in with upward motion */
+}
+
+/* Scroll-triggered animations for Divider Section */
+.scroll-move .divider-section {
+    opacity: 1;
+    transform: translateY(0); /* Appear in place */
+}
+
+.scroll-move .section-heading {
+    opacity: 1;
+    transform: translateX(0); /* Appear from the left */
+}
+
+.scroll-move .section-text {
+    opacity: 1;
+    transform: translateY(0); /* Appear in place */
+}
+
+/* Button container to center the button */
+.button-container {
+    display: flex;
+    justify-content: center;
+    margin: 30px 0; /* Add space above and below the button */
+}
+
+/* Minimalistic Button */
+.minimal-button {
+    background-color: transparent; /* Transparent background */
+    color: rgb(0, 0, 0); /* Text color */
+    border: 2px solid rgb(0, 0, 0); /* Border matching the text */
+    border-radius: 25px; /* Rounded corners */
+    padding: 10px 20px; /* Padding for size */
+    font-size: 1.2rem; /* Text size */
+    font-weight: bold; /* Emphasize the text */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: all 0.3s ease; /* Smooth hover effect */
+}
+
+/* Button Hover Effect */
+.minimal-button:hover {
+    background-color: rgb(255, 255, 255); /* Add a yellow background */
+    color: black; /* Change text color to black for contrast */
+    transform: scale(1.05); /* Slightly enlarge the button */
+    box-shadow: 0px 4px 15px rgba(255, 255, 255, 0.5); /* Add a glowing shadow */
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .logo {
+        font-size: 1.4rem;
+    }
+
+    .menu-icon {
+        font-size: 1.6rem;
+    }
+
+    .container {
+        flex-direction: column;
+    }
+
+    .noob, .two, .boom {
+        font-size: 4rem;
+    }
+
+    .tagline {
+        font-size: 1.5rem;
+    }
+}
